@@ -1,8 +1,22 @@
-// Storage interface for the application
-// Currently not needed as feedback is saved directly to CSV
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
+import { feedbackTable, type InsertFeedback, type SelectFeedback } from "@shared/schema";
 
-export interface IStorage {}
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
-export class MemStorage implements IStorage {}
+export const db = drizzle(pool);
 
-export const storage = new MemStorage();
+export interface IStorage {
+  saveFeedback(feedback: InsertFeedback): Promise<SelectFeedback>;
+}
+
+export class DatabaseStorage implements IStorage {
+  async saveFeedback(feedback: InsertFeedback): Promise<SelectFeedback> {
+    const [result] = await db.insert(feedbackTable).values(feedback).returning();
+    return result;
+  }
+}
+
+export const storage = new DatabaseStorage();

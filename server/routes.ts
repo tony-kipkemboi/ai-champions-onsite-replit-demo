@@ -1,30 +1,14 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
+import { type Server } from "http";
 import { feedbackSchema } from "@shared/schema";
-import fs from "fs";
-import path from "path";
-
-const CSV_FILE = "feedback.csv";
-
-function escapeCSV(value: string): string {
-  if (value.includes(",") || value.includes('"') || value.includes("\n")) {
-    return `"${value.replace(/"/g, '""')}"`;
-  }
-  return value;
-}
-
-function ensureCSVExists() {
-  if (!fs.existsSync(CSV_FILE)) {
-    fs.writeFileSync(CSV_FILE, "timestamp,name,department,message\n");
-  }
-}
+import { storage } from "./storage";
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
   
-  app.post("/api/feedback", (req, res) => {
+  app.post("/api/feedback", async (req, res) => {
     try {
       const result = feedbackSchema.safeParse(req.body);
       
@@ -35,19 +19,7 @@ export async function registerRoutes(
         });
       }
 
-      const { name, department, message } = result.data;
-      const timestamp = new Date().toISOString();
-      
-      ensureCSVExists();
-      
-      const csvLine = [
-        escapeCSV(timestamp),
-        escapeCSV(name),
-        escapeCSV(department),
-        escapeCSV(message)
-      ].join(",") + "\n";
-      
-      fs.appendFileSync(CSV_FILE, csvLine);
+      await storage.saveFeedback(result.data);
       
       return res.status(200).json({ success: true });
     } catch (error) {

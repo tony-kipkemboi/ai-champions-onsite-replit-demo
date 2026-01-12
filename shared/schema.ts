@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
 
 export const departments = [
   "Engineering",
@@ -10,6 +12,19 @@ export const departments = [
   "Other"
 ] as const;
 
+export const feedbackTable = pgTable("feedback", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  department: text("department").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertFeedbackSchema = createInsertSchema(feedbackTable).omit({
+  id: true,
+  createdAt: true,
+});
+
 export const feedbackSchema = z.object({
   name: z.string().min(1, "Name is required"),
   department: z.enum(departments, { required_error: "Please select a department" }),
@@ -17,4 +32,6 @@ export const feedbackSchema = z.object({
 });
 
 export type Feedback = z.infer<typeof feedbackSchema>;
+export type InsertFeedback = z.infer<typeof insertFeedbackSchema>;
+export type SelectFeedback = typeof feedbackTable.$inferSelect;
 export type Department = typeof departments[number];
