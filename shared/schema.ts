@@ -1,18 +1,20 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+export const departments = [
+  "Engineering",
+  "Marketing", 
+  "Sales",
+  "HR",
+  "Operations",
+  "Finance",
+  "Other"
+] as const;
+
+export const feedbackSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  department: z.enum(departments, { required_error: "Please select a department" }),
+  message: z.string().min(1, "Feedback message is required"),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-});
-
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export type Feedback = z.infer<typeof feedbackSchema>;
+export type Department = typeof departments[number];
