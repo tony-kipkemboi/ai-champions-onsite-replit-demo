@@ -46,6 +46,9 @@ export default function FeedbackPage() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
+        <div className="bg-red-50 border-2 border-red-500 text-red-700 px-4 py-3 text-center text-sm font-medium" data-testid="banner-disclaimer">
+          This is for Demo purposes ONLY (AI Champions Onsite Jan, 2026)
+        </div>
         <header className="p-6">
           <img src={guildLogo} alt="Guild" className="h-8" data-testid="img-logo" />
         </header>
@@ -71,12 +74,9 @@ export default function FeedbackPage() {
             </CardContent>
           </Card>
         </main>
-        <footer className="p-6 text-center space-y-2">
+        <footer className="p-6 text-center">
           <p className="text-xs text-muted-foreground" data-testid="text-footer">
             Submissions are confidential and reviewed by HR
-          </p>
-          <p className="text-xs text-muted-foreground/70" data-testid="text-disclaimer">
-            This is a demo application for demonstration purposes only.
           </p>
         </footer>
       </div>
@@ -85,6 +85,9 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <div className="bg-red-50 border-2 border-red-500 text-red-700 px-4 py-3 text-center text-sm font-medium" data-testid="banner-disclaimer">
+        This is for Demo purposes ONLY (AI Champions Onsite Jan, 2026)
+      </div>
       <header className="p-6">
         <img src={guildLogo} alt="Guild" className="h-8" data-testid="img-logo" />
       </header>
@@ -201,12 +204,9 @@ export default function FeedbackPage() {
           </CardContent>
         </Card>
       </main>
-      <footer className="p-6 text-center space-y-2">
+      <footer className="p-6 text-center">
         <p className="text-xs text-muted-foreground" data-testid="text-footer">
           Submissions are confidential and reviewed by HR
-        </p>
-        <p className="text-xs text-muted-foreground/70" data-testid="text-disclaimer">
-          This is a demo application for demonstration purposes only.
         </p>
       </footer>
     </div>
