@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import guildLogo from "@assets/Guild_Logo_Off-Black_RGB_1768243951714.png";
 
 export default function FeedbackPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -46,13 +47,13 @@ export default function FeedbackPage() {
     return (
       <div className="min-h-screen bg-background flex flex-col">
         <header className="p-6">
-          <span className="text-xl font-semibold text-foreground" data-testid="text-logo">Guild</span>
+          <img src={guildLogo} alt="Guild" className="h-8" data-testid="img-logo" />
         </header>
         <main className="flex-1 flex items-center justify-center p-4">
           <Card className="w-full max-w-2xl">
             <CardContent className="p-8 flex flex-col items-center justify-center space-y-6 text-center">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-primary" data-testid="icon-success" />
+              <div className="w-16 h-16 rounded-full bg-[#ED732E]/10 flex items-center justify-center">
+                <CheckCircle className="w-8 h-8 text-[#ED732E]" data-testid="icon-success" />
               </div>
               <div className="space-y-2">
                 <h2 className="text-xl font-semibold text-foreground" data-testid="text-thank-you">Thank You!</h2>
@@ -82,7 +83,7 @@ export default function FeedbackPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <header className="p-6">
-        <span className="text-xl font-semibold text-foreground" data-testid="text-logo">Guild</span>
+        <img src={guildLogo} alt="Guild" className="h-8" data-testid="img-logo" />
       </header>
       <main className="flex-1 flex items-center justify-center p-4">
         <Card className="w-full max-w-2xl">
@@ -179,7 +180,7 @@ export default function FeedbackPage() {
                 <div className="pt-2 flex justify-center">
                   <Button
                     type="submit"
-                    className="h-12 min-w-[200px] w-full md:w-auto bg-[#F2642C] hover-elevate active-elevate-2 text-white font-medium"
+                    className="h-12 min-w-[200px] w-full md:w-auto bg-[#ED732E] hover-elevate active-elevate-2 text-white font-medium"
                     disabled={submitMutation.isPending}
                     data-testid="button-submit"
                   >
