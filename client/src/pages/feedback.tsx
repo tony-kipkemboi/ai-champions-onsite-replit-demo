@@ -71,9 +71,12 @@ export default function FeedbackPage() {
             </CardContent>
           </Card>
         </main>
-        <footer className="p-6 text-center">
+        <footer className="p-6 text-center space-y-2">
           <p className="text-xs text-muted-foreground" data-testid="text-footer">
             Submissions are confidential and reviewed by HR
+          </p>
+          <p className="text-xs text-muted-foreground/70" data-testid="text-disclaimer">
+            This is a demo application for demonstration purposes only.
           </p>
         </footer>
       </div>
@@ -198,9 +201,12 @@ export default function FeedbackPage() {
           </CardContent>
         </Card>
       </main>
-      <footer className="p-6 text-center">
+      <footer className="p-6 text-center space-y-2">
         <p className="text-xs text-muted-foreground" data-testid="text-footer">
           Submissions are confidential and reviewed by HR
+        </p>
+        <p className="text-xs text-muted-foreground/70" data-testid="text-disclaimer">
+          This is a demo application for demonstration purposes only.
         </p>
       </footer>
     </div>
