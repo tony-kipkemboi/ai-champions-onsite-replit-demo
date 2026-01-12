@@ -175,6 +175,48 @@
   }
 }
 
+/* Bloomberg-style ticker animation */
+.ticker-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2.5rem;
+  white-space: nowrap;
+}
+
+.ticker {
+  display: flex;
+  align-items: center;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Pause on hover for accessibility */
+.ticker-wrap:hover .ticker {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .ticker {
+    animation-play-state: paused;
+  }
+}
+
 /**
  * Using the elevate system.
  * Automatic contrast adjustment.

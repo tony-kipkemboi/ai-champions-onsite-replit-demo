@@ -13,6 +13,30 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import guildLogo from "@assets/Guild_Logo_Off-Black_RGB_1768243951714.png";
 
+function TickerBanner() {
+  const message = "This is for Demo purposes ONLY (AI Champions Onsite Jan, 2026)";
+  return (
+    <div className="bg-[#170B01] overflow-hidden border-b-4 border-[#ED732E]" data-testid="banner-disclaimer">
+      <div className="ticker-wrap">
+        <div className="ticker">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="ticker-item text-white font-semibold text-sm uppercase tracking-wider">
+              {message} <span className="text-[#ED732E] mx-4">●</span>
+            </span>
+          ))}
+        </div>
+        <div className="ticker" aria-hidden="true">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="ticker-item text-white font-semibold text-sm uppercase tracking-wider">
+              {message} <span className="text-[#ED732E] mx-4">●</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function FeedbackPage() {
   const [submitted, setSubmitted] = useState(false);
 
@@ -46,9 +70,7 @@ export default function FeedbackPage() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-background flex flex-col">
-        <div className="bg-red-50 border-2 border-red-500 text-red-700 px-4 py-3 text-center text-sm font-medium" data-testid="banner-disclaimer">
-          This is for Demo purposes ONLY (AI Champions Onsite Jan, 2026)
-        </div>
+        <TickerBanner />
         <header className="p-6">
           <img src={guildLogo} alt="Guild" className="h-8" data-testid="img-logo" />
         </header>
@@ -85,9 +107,7 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="bg-red-50 border-2 border-red-500 text-red-700 px-4 py-3 text-center text-sm font-medium" data-testid="banner-disclaimer">
-        This is for Demo purposes ONLY (AI Champions Onsite Jan, 2026)
-      </div>
+      <TickerBanner />
       <header className="p-6">
         <img src={guildLogo} alt="Guild" className="h-8" data-testid="img-logo" />
       </header>
